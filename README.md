@@ -92,6 +92,184 @@ If fails, follow manual linking steps below,
    add \$(SRCROOT)/../node_modules/react-native-tableview (make sure it's
    recursive).
 
+## Example
+```js
+import React, { Component } from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import { Cell, Section, TableView } from 'react-native-tableview-simple';
+
+// Example component for section:headerComponent
+const CustomSectionHeader = () => (
+  <View>
+    <Text>Custom header!</Text>
+  </View>
+);
+
+export default class App extends Component {
+  render() {
+    /*
+     * Uncomment following line to render example with flatlist
+     */
+    // return <ExampleWithFlatList />;
+
+    return (
+      <ScrollView contentContainerStyle={styles.stage}>
+        <TableView appearance="light">
+
+
+          <Section header="STANDARD" >
+            <Cell cellStyle="Basic" title="Basic" />
+            <Cell cellStyle="RightDetail" title="RightDetail" detail="Detail" />
+            <Cell
+              cellStyle="Subtitle"
+              title="Developer Mode"
+              detail="OFF "
+            />
+            <Cell
+              cellStyle="Basic"
+              title="Press To Send Massege"
+              onPress={() => console.log('Heyo from standard Table ')}
+            />
+          </Section>
+
+        
+          <Section header="DISABLED" >
+            <Cell cellStyle="Basic" isDisabled title="Basic" />
+            <Cell cellStyle="RightDetail" isDisabled title="RightDetail" detail="Detail" />
+            <Cell
+              cellStyle="Subtitle"
+              title="Developer Mode"
+              detail="OFF "
+              isDisabled
+            />
+            <Cell
+              cellStyle="Basic"
+              isDisabled
+              title="Press To Send Massege"
+              onPress={() => console.log('Heyo from disabled table')}
+            />
+          </Section>
+
+          <Section header="WITH ACCESSORY" >
+            <Cell 
+              cellStyle="Basic" 
+              cellAccessoryView={<ActivityIndicator />}
+              title="Basic" />
+            <Cell 
+              cellStyle="RightDetail" 
+              title="RightDetail" 
+              detail="Detail"
+              accessory="DisclosureIndicator"
+              />
+            <Cell
+              cellStyle="Subtitle"
+              title="Developer Mode"
+              accessory="Checkmark"
+              detail="ON"
+            />
+            <Cell
+              cellStyle="Basic"
+              title="Press To Send Massege"
+              accessory="DisclosureIndicator"
+              onPress={() => console.log('Heyo from Accessory ')}
+            />
+            <Cell
+              cellContentView={
+                <TextInput
+                  style={{ fontSize: 16, flex: 1 }}
+                  placeholder="TextInput"
+                />
+              }
+            />
+          </Section>
+
+
+          <Section header="Table With Images" >
+            <Cell
+              cellStyle="Basic"
+              title="Basic"
+              image={
+                <Image
+                  style={{ borderRadius: 5 }}
+                  source={
+                    require ('./pics/dis.png')
+                  }
+                />
+              }
+            />
+            <Cell
+              cellStyle="RightDetail"
+              title="RightDetail"
+              detail="Detail"
+              image={
+                <Image
+                  style={{ borderRadius: 5 }}
+                  source={
+                    require ('./pics/clock.png')
+                  }
+                />
+              }
+            />
+            <Cell
+              cellStyle="Subtitle"
+              title="Devloper Mode"
+              detail="OFF"
+              image={
+                <Image
+                  style={{ borderRadius: 5 }}
+                  source={
+                    require ('./pics/sec.png')
+                  }
+                />
+              }
+            />
+            <Cell
+              cellStyle="Basic"
+              title="Press To Send Massege"
+              onPress={() => console.log('Heyo from image table')}
+              image={
+                <Image
+                  style={{ borderRadius: 5 }}
+                  source={
+                    require ('./pics/key.png')
+                  }
+                />
+              }
+            />
+            
+          </Section>
+
+
+
+
+        </TableView>
+      </ScrollView>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  stage: {
+    backgroundColor: '#EFEFF4',
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+});
+
+
+
+
+```
+
 ## Supported Styles
 
 ### UITableView styles
@@ -104,8 +282,8 @@ These values are provided to the `tableViewStyle` prop.
 
 | Style   | Value                            | Preview                                      |
 | ------- | -------------------------------- | -------------------------------------------- |
-| Plain   | `TableView.Consts.Style.Plain`   | ![alt text] (https://github.com/aksonov/react-native-tableview/blob/master/.github/tableview-plain.png)   |
-| Grouped | `TableView.Consts.Style.Grouped` | ![alt text](./.github/tableview-grouped.png) |
+| Plain   | `TableView.Consts.Style.Plain`   | ![alt text](./assests/tableview-plain.png)  |
+| Grouped | `TableView.Consts.Style.Grouped` | ![alt text](./assests/tableview-grouped.png) |
 
 ### UITableViewCell styles
 
@@ -117,10 +295,10 @@ These values are provided to the `tableViewCellStyle` prop.
 
 | Style    | Value                                 | Preview                                        |
 | -------- | ------------------------------------- | ---------------------------------------------- |
-| Default  | `TableView.Consts.CellStyle.Default`  | ![alt text](./.github/cell-style-default.png)  |
-| Value1   | `TableView.Consts.CellStyle.Value1`   | ![alt text](./.github/cell-style-value1.png)   |
-| Value2   | `TableView.Consts.CellStyle.Value2`   | ![alt text](./.github/cell-style-value2.png)   |
-| Subtitle | `TableView.Consts.CellStyle.Subtitle` | ![alt text](./.github/cell-style-subtitle.png) |
+| Default  | `TableView.Consts.CellStyle.Default`  | ![alt text](./assests/cell-style-default.png)  |
+| Value1   | `TableView.Consts.CellStyle.Value1`   | ![alt text](./assests/cell-style-value1.png)   |
+| Value2   | `TableView.Consts.CellStyle.Value2`   | ![alt text](./assests/cell-style-value2.png)   |
+| Subtitle | `TableView.Consts.CellStyle.Subtitle` | ![alt text](./assests/cell-style-subtitle.png) |
 
 ### Accessory types
 
@@ -132,11 +310,11 @@ These values are provided to the `accessoryType` prop on the `Item`.
 
 | Style                | Value                                                | Preview                                                   |
 | -------------------- | ---------------------------------------------------- | --------------------------------------------------------- |
-| None                 | `TableView.Consts.AccessoryType.None`                | ![alt text](./.github/accessory-none.png)                 |
-| Disclosure Indicator | `TableView.Consts.AccessoryType.DisclosureIndicator` | ![alt text](./.github/accessory-disclosure-indicator.png) |
-| Disclosure Button    | `TableView.Consts.AccessoryType.DisclosureButton`    | ![alt text](./.github/accessory-disclosure-button.png)    |
-| Checkmark            | `TableView.Consts.AccessoryType.Checkmark`           | ![alt text](./.github/accessory-checkmark.png)            |
-| Detail Button        | `TableView.Consts.AccessoryType.DetailButton`        | ![alt text](./.github/accessory-detail-button.png)        |
+| None                 | `TableView.Consts.AccessoryType.None`                | ![alt text](./assests/accessory-none.png)                 |
+| Disclosure Indicator | `TableView.Consts.AccessoryType.DisclosureIndicator` | ![alt text](./assests/accessory-disclosure-indicator.png) |
+| Disclosure Button    | `TableView.Consts.AccessoryType.DisclosureButton`    | ![alt text](./assests/accessory-disclosure-button.png)    |
+| Checkmark            | `TableView.Consts.AccessoryType.Checkmark`           | ![alt text](./assests/accessory-checkmark.png)            |
+| Detail Button        | `TableView.Consts.AccessoryType.DetailButton`        | ![alt text](./assests/accessory-detail-button.png)        |
 
 Disclosure Indicator can also be applied by adding the `arrow` prop on the
 section.
